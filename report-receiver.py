@@ -68,7 +68,7 @@ class IntSight_Report(Packet):
         sps = fmt.format(self.suspicion_points)[::-1]
         sps = sps.replace('0', '-')
         sps = sps.replace('1', 's')
-        out += '{:d},{:d},{:d},{:d},{},{}'.format(
+        out += '{:d},{:d},{:d},{:d},{},{},'.format(
             self.path_src, self.path_dst, self.path_code, self.path_length, cps, sps
         )
         out += '{:03d},'.format(self.high_delays)
