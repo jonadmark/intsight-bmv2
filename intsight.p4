@@ -56,7 +56,7 @@ header intsight_telemetry_h {
     bit<8> next_header;
 }
 
-#define REPORT_HS 50  // bytes
+#define REPORT_HS 54  // bytes
 header intsight_report_h {
     bit<32> epoch;
     bit<32> egress_epoch;
