@@ -1,0 +1,57 @@
+{
+    "tcpreplay": [
+        {
+            "start_delay": 0,
+            "duration": 60,
+            "sender": "h1",
+            "sender_opt": "--preload-pcap --stats=1 --loop=6 ../resources/workloads/e2edelay/red.pcp",
+            "sender_log": "red-s-h1-h10.txt",
+            "receiver": "h10",
+            "receiver_opt": "10.0.5.10 1234",
+            "receiver_log": "red-r-h1-h10.txt"
+        },
+        {
+            "start_delay": 0,
+            "duration": 60,
+            "sender": "h2",
+            "sender_opt": "--preload-pcap --stats=1 --loop=6 ../resources/workloads/e2edelay/blue.pcp",
+            "sender_log": "blue-s-h2-h3.txt",
+            "receiver": "h3",
+            "receiver_opt": "10.0.2.3 1234",
+            "receiver_log": "blue-r-h2-h3.txt"
+        },
+        {
+            "start_delay": 0,
+            "duration": 60,
+            "sender": "h4",
+            "sender_opt": "--preload-pcap --stats=1 --loop=6 ../resources/workloads/e2edelay/teal.pcp",
+            "sender_log": "teal-s-h4-h7.txt",
+            "receiver": "h7",
+            "receiver_opt": "10.0.4.7 1234",
+            "receiver_log": "teal-r-h4-h7.txt"
+        },
+        {
+            "start_delay": 0,
+            "duration": 60,
+            "sender": "h6",
+            "sender_opt": "--preload-pcap --stats=1 --loop=6 ../resources/workloads/e2edelay/green.pcp",
+            "sender_log": "green-s-h6-h7.txt",
+            "receiver": "h7",
+            "receiver_opt": "10.0.4.7 1235",
+            "receiver_log": "green-r-h6-h7.txt"
+        },
+        {
+            "start_delay": 30,
+            "duration": 5,
+            "sender": "h6",
+            "sender_opt": "--preload-pcap --limit=1116 --pps=8928 --stats=1 ../resources/workloads/e2edelay/orange.pcp",
+            "sender_log": "orange-s-h6-h9.txt",
+            "receiver": "h9",
+            "receiver_opt": "10.0.5.9 1234",
+            "receiver_log": "orange-r-h6-h9.txt"
+        }
+    ],
+    "iperf3": [],
+    "ping": [],
+    "backup": []
+}
