@@ -24,6 +24,7 @@ class IntSight_Report(Packet):
         BitField("path_length", 0,  6),
         ShortField("path_code", 0),
         BitField("contention_points", 0, 48),
+        BitField("suspicion_points", 0, 48),
         ShortField("path_dst", 0),
         IntField("high_delays", 0),
         IntField("drops", 0),
@@ -39,9 +40,12 @@ class IntSight_Report(Packet):
         fmt = '{{:0{}b}}'.format(self.path_length)
         cps = fmt.format(self.contention_points)[::-1]
         cps = cps.replace('0', '-')
-        cps = cps.replace('1', '^')
-        out += '({:1d} => {:1d}, p={:d}, len={:d}, cps={:>5}) '.format(
-            self.path_src, self.path_dst, self.path_code, self.path_length, cps
+        cps = cps.replace('1', 'c')
+        sps = fmt.format(self.suspicion_points)[::-1]
+        cps = cps.replace('0', '-')
+        cps = cps.replace('1', 's')
+        out += '({:1d} => {:1d}, p={:d}, len={:d}, cps={:>5}, sps={:>5}) '.format(
+            self.path_src, self.path_dst, self.path_code, self.path_length, cps, sps
         )
         out += 'hd={:03d} '.format(self.high_delays)
         out += 'pkts={:04d}=>{:04d}({:03d}) bits={:08d}=>{:08d}' \
@@ -60,9 +64,12 @@ class IntSight_Report(Packet):
         fmt = '{{:0{}b}}'.format(self.path_length)
         cps = fmt.format(self.contention_points)[::-1]
         cps = cps.replace('0', '-')
-        cps = cps.replace('1', '^')
-        out += '{:d},{:d},{:d},{:d},{},'.format(
-            self.path_src, self.path_dst, self.path_code, self.path_length, cps
+        cps = cps.replace('1', 'c')
+        sps = fmt.format(self.suspicion_points)[::-1]
+        cps = cps.replace('0', '-')
+        cps = cps.replace('1', 's')
+        out += '{:d},{:d},{:d},{:d},{},{}'.format(
+            self.path_src, self.path_dst, self.path_code, self.path_length, cps, sps
         )
         out += '{:03d},'.format(self.high_delays)
         out += '{:d},{:d},{:d},{:d},{:d}' \
@@ -85,7 +92,7 @@ class PacketSniffer(threading.Thread):
             f.write('# IntSight report packet log for interface {}.\n' \
                     .format(self.interface))
         with open(self.log_filename + '.csv', 'w') as f:
-            f.write('epoch,flow,psrc,pdst,path,plen,cps,hds,' \
+            f.write('epoch,flow,psrc,pdst,path,plen,cps,sps,hds,' \
                     'ipkts,epkts,drops,ibytes,ebytes\n')
     
     def log_packet(self, pkt):

@@ -5,6 +5,7 @@ import networkx as nx
 
 # 3072 8 4
 
+EPOCH_LENGTH = 2**16  # microseconds
 LBW = 100  # Mbps
 Q_RATE = 8928  # packets/second (default: 3072) 8400 6300
 Q_DEPTH_FRAC = 8
@@ -15,6 +16,7 @@ CTH_DEPTH = int(Q_DEPTH/CTH_DEPTH_FRAC)
 # microseconds 10000 (default: 10000) SLA DEPENDENT
 CTH_TIMEDELTA = int((1000000/Q_DEPTH_FRAC)/CTH_DEPTH_FRAC)
 
+STH_BITRATE = int((LBW/8)/(1e6/EPOCH_LENGTH))
 
 def main(net_file):
 
@@ -117,6 +119,15 @@ def main(net_file):
             "action_params": {
                 "timedelta": CTH_TIMEDELTA,
                 "depth": CTH_DEPTH
+            }
+        })
+        # suspicion thresholds
+        table_entries[nid].append({
+            "table": "egress.suspicion_thresholds",
+            "default_action": True,
+            "action_name": "egress.set_suspicion_thresholds",
+            "action_params": {
+                "bitrate": STH_BITRATE,
             }
         })
 

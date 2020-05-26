@@ -42,21 +42,21 @@ header ipv4_h {
     bit<32> dst_addr;
 }
 
-#define TELEMETRY_HS 27  // bytes
+#define TELEMETRY_HS 33  // bytes
 header intsight_telemetry_h {
     bit<32> epoch;
-    // path_src, path_length, and path_code form the path ID
     bit<10> path_src;
     bit<6>  path_length;
     bit<16> path_code;
     bit<48> contention_points;
+    bit<48> suspicion_points;
     bit<32> e2e_delay;
     bit<32> ingress_packets;
     bit<32> ingress_bytes;
     bit<8> next_header;
 }
 
-#define REPORT_HS 44  // bytes
+#define REPORT_HS 50  // bytes
 header intsight_report_h {
     bit<32> epoch;
     bit<32> flow_ID;
@@ -65,6 +65,7 @@ header intsight_report_h {
     bit<6>  path_length;
     bit<16> path_code;
     bit<48> contention_points;
+    bit<48> suspicion_points;
     bit<16> path_dst;
     bit<32> high_delays;
     bit<32> drops;
@@ -101,6 +102,7 @@ struct custom_metadata_t {
     bit<6>   e_path_length;
     bit<16>  e_path_code;
     bit<48>  e_contention_points;
+    bit<48>  e_suspicion_points;
     bit<32>  e_high_delays;
     bit<32>  e_drops;
     bit<32>  e_ingress_packets;
@@ -328,6 +330,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
     register<bit<6>>(REGWID)   e_path_length;
     register<bit<16>>(REGWID)  e_path_code;
     register<bit<48>>(REGWID)  e_contention_points;
+    register<bit<48>>(REGWID)  e_suspicion_points;
     register<bit<32>>(REGWID)  e_high_delays;
     register<bit<32>>(REGWID)  e_ingress_packets;
     register<bit<32>>(REGWID)  e_ingress_bytes;
@@ -374,6 +377,20 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
             set_contention_thresholds;
         }
         default_action = set_contention_thresholds(0, 0);
+    }
+
+    action set_suspicion_thresholds(bit<32> bitrate) {
+        cmd.qt_bitrate = bitrate;
+    }
+
+    table suspicion_thresholds {
+        key = {
+            smd.egress_port: exact;
+        }
+        actions = {
+            set_suspicion_thresholds;
+        }
+        default_action = set_suspicion_thresholds(0);
     }
 
     action set_path_ID(bit<16> new_path_code) {
@@ -505,6 +522,14 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                             hdrs.telemetry.contention_points
                             | ((bit<48>) 1) << hdrs.telemetry.path_length;
                     }
+                    // SUSPICION?
+                    suspicion_thresholds.apply();
+                    if(hdrs.telemetry.ingress_bytes >= cmd.qt_bitrate) {
+                        // MARK FIELD: SUSPICION POINTS
+                        hdrs.telemetry.suspicion_points = \
+                            hdrs.telemetry.suspicion_points
+                            | ((bit<48>) 1) << hdrs.telemetry.path_length;
+                    }
                     // UPDATE FIELD: PATH ID
                     update_path_ID.apply();
                     hdrs.telemetry.path_length =
@@ -624,9 +649,33 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                     } else {
                         // and update the register with the newly identified
                         // points.
-                        e_contention_points.write(cmd.flow_ID,
+                        e_contention_points.write(
+                            cmd.flow_ID,
                             (cmd.e_contention_points
-                            | hdrs.telemetry.contention_points));
+                            | hdrs.telemetry.contention_points)
+                        );
+                    }
+
+                    // SUSPICION POINTS
+                    // Store the last suspicion points in
+                    // cmd.e_suspicion_points..
+                    e_suspicion_points.read(cmd.e_suspicion_points,
+                                            cmd.flow_ID);
+                    if(hdrs.telemetry.epoch != cmd.e_epoch) {
+                        // and update the registers to the newly received ones
+                        // in the case of a new epoch.
+                        e_suspicion_points.write(
+                            cmd.flow_ID,
+                            hdrs.telemetry.suspicion_points
+                        );
+                    } else {
+                        // and update the register with the newly identified
+                        // points.
+                        e_suspicion_points.write(
+                            cmd.flow_ID,
+                            (cmd.e_suspicion_points
+                            | hdrs.telemetry.suspicion_points)
+                        );
                     }
                     // END OF UPDATE REGISTERS
                     // =======================
@@ -660,6 +709,11 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                             cmd.e_report = 1;
                         }
 
+                        // SUSPICIONS?
+                        if(cmd.e_suspicion_points > 0) {
+                            cmd.e_report = 1;
+                        }
+
                         // REPORT VIOLATIONS OR PROBLEMS
                         if(cmd.e_report == 1) {
                             // Create report packet by cloning the current
@@ -683,6 +737,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                 hdrs.report.path_length = cmd.e_path_length;
                 hdrs.report.path_code = cmd.e_path_code;
                 hdrs.report.contention_points = cmd.e_contention_points;
+                hdrs.report.suspicion_points = cmd.e_suspicion_points;
                 hdrs.report.path_dst = (bit<16>) cmd.node_ID;
                 hdrs.report.high_delays = cmd.e_high_delays;
                 hdrs.report.drops = cmd.e_drops;
