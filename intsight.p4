@@ -741,7 +741,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                 // Create IntSight report header.
                 hdrs.report.setValid();
                 hdrs.report.epoch = cmd.e_epoch;
-                hdrs.report.epoch = cmd.e_egress_epoch;
+                hdrs.report.egress_epoch = cmd.e_egress_epoch;
                 hdrs.report.flow_ID = cmd.flow_ID;
                 hdrs.report.path_src = cmd.e_path_src;
                 hdrs.report.path_length = cmd.e_path_length;
