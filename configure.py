@@ -539,4 +539,4 @@ if __name__ == '__main__':
         main(sys.argv[1])
     else:
         print('Usage: python3 configure.py <network_json>')
-    # main('network2.json')
+        sys.exit(1)

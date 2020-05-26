@@ -1,7 +1,7 @@
 {
     "capture_traffic": false,
     "run_workload": true,
-    "workload_file": "config/e2edelay/workload.json",
+    "workload_file": "experiments/e2edelay/workload.json",
     "nodes": 5,
     "hosts_per_node": 2,
     "node_links": [
