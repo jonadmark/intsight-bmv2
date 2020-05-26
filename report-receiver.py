@@ -19,7 +19,7 @@ class IntSight_Report(Packet):
     name = "IntSight_Report"
     fields_desc = [
         IntField("epoch", 0),
-        # IntField("egress_epoch", 0),
+        IntField("egress_epoch", 0),
         IntField("flow_ID", 0),
         BitField("path_src", 0,  10),
         BitField("path_length", 0,  6),
@@ -37,8 +37,8 @@ class IntSight_Report(Packet):
 
     def __repr__(self):
         out = ''
-        # out += '[{:4d}=>{:4d}:{:2d}] '.format(self.epoch, self.egress_epoch, self.flow_ID)
-        out += '[{:4d}:{:2d}] '.format(self.epoch, self.flow_ID)
+        out += '[{:4d}=>{:4d}:{:2d}] '.format(self.epoch, self.egress_epoch, self.flow_ID)
+        # out += '[{:4d}:{:2d}] '.format(self.epoch, self.flow_ID)
         fmt = '{{:0{}b}}'.format(self.path_length)
         cps = fmt.format(self.contention_points)[::-1]
         cps = cps.replace('0', '-')
@@ -62,8 +62,8 @@ class IntSight_Report(Packet):
     
     def csv(self):
         out = ''
-        # out += '{:d},{:d},{:d},'.format(self.epoch, self.egress_epoch, self.flow_ID)
-        out += '{:d},{:d},'.format(self.epoch, self.flow_ID)
+        out += '{:d},{:d},{:d},'.format(self.epoch, self.egress_epoch, self.flow_ID)
+        # out += '{:d},{:d},'.format(self.epoch, self.flow_ID)
         fmt = '{{:0{}b}}'.format(self.path_length)
         cps = fmt.format(self.contention_points)[::-1]
         cps = cps.replace('0', '-')
@@ -95,8 +95,8 @@ class PacketSniffer(threading.Thread):
             f.write('# IntSight report packet log for interface {}.\n' \
                     .format(self.interface))
         with open(self.log_filename + '.csv', 'w') as f:
-            # f.write('epoch,eepoch,flow,psrc,pdst,path,plen,cps,sps,hds,' \
-            f.write('epoch,flow,psrc,pdst,path,plen,cps,sps,hds,' \
+            f.write('epoch,eepoch,flow,psrc,pdst,path,plen,cps,sps,hds,' \
+            # f.write('epoch,flow,psrc,pdst,path,plen,cps,sps,hds,' \
                     'ipkts,epkts,drops,ibytes,ebytes\n')
     
     def log_packet(self, pkt):
