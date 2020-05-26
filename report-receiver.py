@@ -42,8 +42,8 @@ class IntSight_Report(Packet):
         cps = cps.replace('0', '-')
         cps = cps.replace('1', 'c')
         sps = fmt.format(self.suspicion_points)[::-1]
-        cps = cps.replace('0', '-')
-        cps = cps.replace('1', 's')
+        sps = sps.replace('0', '-')
+        sps = sps.replace('1', 's')
         out += '({:1d} => {:1d}, p={:d}, len={:d}, cps={:>5}, sps={:>5}) '.format(
             self.path_src, self.path_dst, self.path_code, self.path_length, cps, sps
         )
@@ -66,8 +66,8 @@ class IntSight_Report(Packet):
         cps = cps.replace('0', '-')
         cps = cps.replace('1', 'c')
         sps = fmt.format(self.suspicion_points)[::-1]
-        cps = cps.replace('0', '-')
-        cps = cps.replace('1', 's')
+        sps = sps.replace('0', '-')
+        sps = sps.replace('1', 's')
         out += '{:d},{:d},{:d},{:d},{},{}'.format(
             self.path_src, self.path_dst, self.path_code, self.path_length, cps, sps
         )
