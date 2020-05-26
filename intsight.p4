@@ -96,6 +96,7 @@ struct custom_metadata_t {
     
     bit<32>  qt_timedelta;
     bit<19>  qt_depth;
+    bit<32>  qt_bitrate;
 
     bit<32>  e_epoch;
     bit<10>  e_path_src;
