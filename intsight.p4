@@ -576,7 +576,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
 
                     // EGRESS EPOCH
                     e_egress_epoch.read(cmd.e_egress_epoch, cmd.flow_ID);
-                    cmd.e_new_egress_epoch = (bit<32>) (smd.egress_global_timestamp >> EPOCH_SHIFT);
+                    cmd.e_new_egress_epoch = (bit<32>) (smd.ingress_global_timestamp >> EPOCH_SHIFT);
                     e_egress_epoch.write(cmd.flow_ID, cmd.e_new_egress_epoch);
 
                     // PATH ID: Store the last path in cmd.e_path_src,length,
