@@ -100,7 +100,7 @@ struct custom_metadata_t {
     bit<32>  qt_bitrate;
 
     bit<32>  e_epoch;
-    bit<32>  e_egress_epoch;
+    // bit<32>  e_egress_epoch;
     bit<10>  e_path_src;
     bit<6>   e_path_length;
     bit<16>  e_path_code;
@@ -330,7 +330,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
 
     // Registers in network egress nodes
     register<bit<32>>(REGWID)  e_epoch;
-    register<bit<32>>(REGWID)  e_egress_epoch;
+    // register<bit<32>>(REGWID)  e_egress_epoch;
     register<bit<10>>(REGWID)  e_path_src;
     register<bit<6>>(REGWID)   e_path_length;
     register<bit<16>>(REGWID)  e_path_code;
@@ -574,8 +574,8 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                     e_epoch.write(cmd.flow_ID, hdrs.telemetry.epoch);
 
                     // EGRESS EPOCH
-                    e_egress_epoch.read(cmd.e_egress_epoch, cmd.flow_ID);
-                    e_epoch.write(cmd.flow_ID, (bit<32>) (smd.egress_global_timestamp >> EPOCH_SHIFT));
+                    // e_egress_epoch.read(cmd.e_egress_epoch, cmd.flow_ID);
+                    // e_epoch.write(cmd.flow_ID, (bit<32>) (smd.egress_global_timestamp >> EPOCH_SHIFT));
 
                     // PATH ID: Store the last path in cmd.e_path_src,length,
                     // code and update the registers to the newly received one.
