@@ -59,7 +59,7 @@ header intsight_telemetry_h {
 #define REPORT_HS 54  // bytes
 header intsight_report_h {
     bit<32> epoch;
-    bit<32> egress_epoch;
+    // bit<32> egress_epoch;
     bit<32> flow_ID;
     // path_src, path_length, and path_code form the path ID
     bit<10> path_src;
@@ -741,7 +741,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                 // Create IntSight report header.
                 hdrs.report.setValid();
                 hdrs.report.epoch = cmd.e_epoch;
-                hdrs.report.egress_epoch = cmd.e_egress_epoch;
+                // hdrs.report.egress_epoch = cmd.e_egress_epoch;
                 hdrs.report.flow_ID = cmd.flow_ID;
                 hdrs.report.path_src = cmd.e_path_src;
                 hdrs.report.path_length = cmd.e_path_length;
