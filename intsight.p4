@@ -146,9 +146,9 @@ struct custom_metadata_t {
 // 10 =     1,024 microseconds ~= 1 millisecond
 #define EPOCH_SHIFT 16
 
-#define IN_DELAY = 20
-#define PN_DELAY = 110
-#define EN_DELAY = 60
+#define IN_DELAY 20
+#define PN_DELAY 110
+#define EN_DELAY 60
 
 parser ParserImpl(packet_in pkt, out headers hdrs, inout custom_metadata_t cmd, 
                   inout standard_metadata_t smd) {
