@@ -146,6 +146,10 @@ struct custom_metadata_t {
 // 10 =     1,024 microseconds ~= 1 millisecond
 #define EPOCH_SHIFT 16
 
+#define IN_DELAY = 20
+#define PN_DELAY = 110
+#define EN_DELAY = 60
+
 parser ParserImpl(packet_in pkt, out headers hdrs, inout custom_metadata_t cmd, 
                   inout standard_metadata_t smd) {
     state start {
@@ -499,7 +503,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                     hdrs.telemetry.path_src = cmd.node_ID;
                     hdrs.telemetry.path_length = 0;
                     hdrs.telemetry.path_code = 0;
-                    hdrs.telemetry.e2e_delay = 20;  // 120
+                    hdrs.telemetry.e2e_delay = IN_DELAY;
                     hdrs.telemetry.ingress_packets = cmd.i_ingress_packets;
                     hdrs.telemetry.ingress_bytes = cmd.i_ingress_bytes;
                     hdrs.telemetry.contention_points = 0;
@@ -517,7 +521,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                     // INCREMENT FIELD: END-TO-END DELAY
                     hdrs.telemetry.e2e_delay = \
                         hdrs.telemetry.e2e_delay
-                        + 110
+                        + PN_DELAY
                         + (smd.deq_timedelta);
                     // CONTENTION?
                     contention_thresholds.apply();
@@ -547,7 +551,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
                 ////////////////////////////////////////////////////////////////
                 if(hdrs.telemetry.isValid() && cmd.is_egress_node == 1) {
                     
-                    hdrs.telemetry.e2e_delay = hdrs.telemetry.e2e_delay + 60;
+                    hdrs.telemetry.e2e_delay = hdrs.telemetry.e2e_delay + EN_DELAY;
 
                     // if(cmd.is_egress_node == 1) {
                     //     hdrs.telemetry.e2e_delay =
@@ -576,7 +580,7 @@ control egress(inout headers hdrs, inout custom_metadata_t cmd,
 
                     // EGRESS EPOCH
                     e_egress_epoch.read(cmd.e_egress_epoch, cmd.flow_ID);
-                    cmd.e_new_egress_epoch = (bit<32>) (smd.ingress_global_timestamp >> EPOCH_SHIFT);
+                    cmd.e_new_egress_epoch = (bit<32>) ((smd.ingress_global_timestamp + (bit<48>) smd.deq_timedelta + PN_DELAY + EN_DELAY) >> EPOCH_SHIFT);
                     e_egress_epoch.write(cmd.flow_ID, cmd.e_new_egress_epoch);
 
                     // PATH ID: Store the last path in cmd.e_path_src,length,
