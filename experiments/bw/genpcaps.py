@@ -48,7 +48,7 @@ def gen_pkts(src_addr, dst_addr, src_port, dst_port, yfunc, lorem, seconds, msgl
         pkt.time = x
         pkts.append(pkt)
         # calculate arrival time for next packet
-        x = x + 1.0/yfunc(x)
+        x = x + 1.0/(yfunc(x)*1e6)
         # count pkts
         i = i + 1
         if i%1000 == 0:
