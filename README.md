@@ -18,7 +18,7 @@ It is recommended to clone this repository inside an empty directory. The worklo
 
 # IntSight Experiments
 
-Experiments are defined and configured inside the `experiments` directory. A `network.json` file defines the network topology, workload definition file, flow SLOs, and other minor parameters. A `workload.json` file defines the workload to be executed during the experiment. A `genpcaps.py` script defines a recipe for generating the pcaps used by tcpreplay to generate the workload as defined in `workload.json`. Run every experiment `genpcaps.py` script to generate its base workload files.
+Experiments are defined and configured inside the `experiments` directory. A `network.json` file defines the network topology, workload definition file, flow SLOs, and other minor parameters. A `workload.json` file defines the workload to be executed during the experiment. A `genpcaps.py` script defines a recipe for generating the pcaps used by tcpreplay to generate the workload as defined in `workload.json`. Run every experiment `genpcaps.py` script to generate their base workload files.
 
 # Running an Experiment
 
