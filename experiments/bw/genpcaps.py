@@ -24,7 +24,7 @@ def main():
     msglen = 1430
     hdslen = 42
 
-    os.makedirs('../../../resources/workloads/bandwidth', exist_ok=True)
+    os.makedirs('../../../resources/workloads/bw', exist_ok=True)
 
     print('Generating traffic for RED flow (h1-h14)')
     rate = int(math.ceil(50e6/8.0/(msglen)))
@@ -41,7 +41,7 @@ def main():
             print(end='.', flush=True)
     print('done', flush=True)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bandwidth/red.pcp', pkts)
+    wrpcap('../../../resources/workloads/bw/red.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for BLUE flow (h7-h11)')
@@ -59,7 +59,7 @@ def main():
             print(end='.', flush=True)
     print('done', flush=True)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bandwidth/blue.pcp', pkts)
+    wrpcap('../../../resources/workloads/bw/blue.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for TEAL flow (h2-h9)')
@@ -77,7 +77,7 @@ def main():
             print(end='.', flush=True)
     print('done', flush=True)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bandwidth/teal.pcp', pkts)
+    wrpcap('../../../resources/workloads/bw/teal.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for GREEN flow (h5-h9)')
@@ -95,7 +95,7 @@ def main():
             print(end='.', flush=True)
     print('done', flush=True)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bandwidth/green.pcp', pkts)
+    wrpcap('../../../resources/workloads/bw/green.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for ORANGE flow (h5-h13)')
@@ -113,7 +113,7 @@ def main():
             print(end='.', flush=True)
     print('done', flush=True)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bandwidth/orange.pcp', pkts)
+    wrpcap('../../../resources/workloads/bw/orange.pcp', pkts)
     print('done', flush=True)
 
 
