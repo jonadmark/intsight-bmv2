@@ -98,12 +98,12 @@ def main():
     wrpcap('../../../resources/workloads/bw/green.pcp', pkts)
     print('done', flush=True)
 
-    print('Generating traffic for ORANGE flow (h5-h13)')
+    print('Generating traffic for ORANGE flow (h6-h13)')
     rate = int(math.ceil(50e6/8.0/(msglen)))
     pkts = []
     for i in range(rate*seconds):
         beg = random.randint(0, 1e6 - msglen - 1)
-        pkt = Ether() / IP(src='10.0.3.5', dst='10.0.7.13') / \
+        pkt = Ether() / IP(src='10.0.3.6', dst='10.0.7.13') / \
             UDP(sport=1234, dport=1234) / lorem[beg:beg+msglen]
         pkt.time = (1.0/rate)*i
         pkts.append(pkt)

@@ -43,12 +43,12 @@
         {
             "start_delay": 20,
             "duration": 20,
-            "sender": "h5",
+            "sender": "h6",
             "sender_opt": "--preload-pcap --stats=1 --limit=53560 --loop=6 --pps=2678 ../resources/workloads/bw/orange.pcp",
-            "sender_log": "orange-s-h5-h13.txt",
+            "sender_log": "orange-s-h6-h13.txt",
             "receiver": "h13",
             "receiver_opt": "10.0.7.13 1234",
-            "receiver_log": "orange-r-h5-h13.txt"
+            "receiver_log": "orange-r-h6-h13.txt"
         }
     ]
 }
