@@ -1,7 +1,7 @@
 {
     "capture_traffic": false,
     "run_workload": true,
-    "workload_file": "experiments/bandwidth/workload.json",
+    "workload_file": "experiments/bw/workload.json",
     "nodes": 7,
     "hosts_per_node": 2,
     "node_links": [
