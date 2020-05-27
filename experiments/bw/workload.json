@@ -11,8 +11,8 @@
             "receiver_log": "red-r-h1-h14.txt"
         },
         {
-            "start_delay": 5,
-            "duration": 50,
+            "start_delay": 0,
+            "duration": 60,
             "sender": "h7",
             "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bw/blue.pcp",
             "sender_log": "blue-s-h7-h11.txt",
@@ -21,8 +21,8 @@
             "receiver_log": "blue-r-h7-h11.txt"
         },
         {
-            "start_delay": 10,
-            "duration": 40,
+            "start_delay": 0,
+            "duration": 60,
             "sender": "h2",
             "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bw/teal.pcp",
             "sender_log": "teal-s-h2-h9.txt",
@@ -31,8 +31,8 @@
             "receiver_log": "teal-r-h2-h9.txt"
         },
         {
-            "start_delay": 15,
-            "duration": 30,
+            "start_delay": 0,
+            "duration": 60,
             "sender": "h5",
             "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bw/green.pcp",
             "sender_log": "green-s-h5-h9.txt",
@@ -41,8 +41,8 @@
             "receiver_log": "green-r-h5-h9.txt"
         },
         {
-            "start_delay": 20,
-            "duration": 20,
+            "start_delay": 0,
+            "duration": 60,
             "sender": "h6",
             "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bw/orange.pcp",
             "sender_log": "orange-s-h6-h13.txt",
