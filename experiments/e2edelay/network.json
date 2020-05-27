@@ -1,5 +1,5 @@
 {
-    "capture_traffic": true,
+    "capture_traffic": false,
     "run_workload": true,
     "workload_file": "experiments/e2edelay/workload.json",
     "nodes": 5,
