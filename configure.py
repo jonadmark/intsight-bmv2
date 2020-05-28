@@ -7,7 +7,7 @@ import networkx as nx
 
 EPOCH_LENGTH = 2**16  # microseconds
 LBW = 100  # Mbps
-Q_RATE = 8928  # packets/second (default: 3072) 8400 6300
+Q_RATE = 9000  # packets/second (default: 3072) 8400 6300
 Q_DEPTH_FRAC = 8
 CTH_DEPTH_FRAC = 8  # 4 bw, 8 burst
 Q_DEPTH = int(Q_RATE/Q_DEPTH_FRAC)  # packets (default: 128) Q_RATE/20

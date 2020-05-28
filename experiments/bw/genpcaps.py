@@ -36,7 +36,7 @@ def Yorange(x):
     return -10*math.cos((x - 20)*math.pi*2/20) + 10 + 10
 
 
-def gen_pkts(src_addr, dst_addr, src_port, dst_port, yfunc, lorem, seconds, msglen, hdslen):
+def gen_pkts(src_addr, dst_addr, src_port, dst_port, yfunc, lorem, seconds, msglen, hdslen, add_noise=True):
     random.seed(42)
     x = 0
     i = 0
@@ -50,7 +50,10 @@ def gen_pkts(src_addr, dst_addr, src_port, dst_port, yfunc, lorem, seconds, msgl
         pkts.append(pkt)
         # calculate arrival time for next packet
         delay = 1.0/((yfunc(x)*1e6)/(8*(hdslen + msglen)))
-        noise = random.gauss(1, 0.1)
+        if add_noise is True:
+            noise = random.gauss(1, 0.1)
+        else:
+            noise = 1.0
         x = x + noise*delay
         # count pkts
         i = i + 1
