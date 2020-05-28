@@ -72,36 +72,36 @@ def main():
     tellen = 33  # IntSight
     msglen = maxframesize - hdslen - tellen
 
-    os.makedirs('../../../resources/workloads/bw', exist_ok=True)
+    os.makedirs('../../../resources/workloads/e2edelay', exist_ok=True)
 
     print('Generating traffic for RED flow (h1-h10)')
     pkts = gen_pkts('10.0.1.1', '10.0.5.10', 1234, 1234, Yred, lorem, seconds, msglen, hdslen)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bw/red.pcp', pkts)
+    wrpcap('../../../resources/workloads/e2edelay/red.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for BLUE flow (h2-h3)')
     pkts = gen_pkts('10.0.1.2', '10.0.2.3', 1234, 1234, Yblue, lorem, seconds, msglen, hdslen)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bw/blue.pcp', pkts)
+    wrpcap('../../../resources/workloads/e2edelay/blue.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for TEAL flow (h4-h7)')
     pkts = gen_pkts('10.0.2.4', '10.0.4.7', 1234, 1234, Yteal, lorem, seconds, msglen, hdslen)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bw/teal.pcp', pkts)
+    wrpcap('../../../resources/workloads/e2edelay/teal.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for GREEN flow (h6-h7)')
     pkts = gen_pkts('10.0.3.6', '10.0.4.7', 1235, 1235, Ygreen, lorem, seconds, msglen, hdslen)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bw/green.pcp', pkts)
+    wrpcap('../../../resources/workloads/e2edelay/green.pcp', pkts)
     print('done', flush=True)
 
     print('Generating traffic for ORANGE flow (h6-h9)')
     pkts = gen_pkts('10.0.3.6', '10.0.5.9', 1234, 1234, Yorange, lorem, seconds, msglen, hdslen, add_noise=False)
     print('Writting traffic to pcap file', end='...', flush=True)
-    wrpcap('../../../resources/workloads/bw/orange.pcp', pkts)
+    wrpcap('../../../resources/workloads/e2edelay/orange.pcp', pkts)
     print('done', flush=True)
 
 
