@@ -41,8 +41,8 @@
             "receiver_log": "green-r-h6-h7.txt"
         },
         {
-            "start_delay": 30,
-            "duration": 5,
+            "start_delay": 0,
+            "duration": 60,
             "sender": "h6",
             "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/e2edelay/orange.pcp",
             "sender_log": "orange-s-h6-h9.txt",
