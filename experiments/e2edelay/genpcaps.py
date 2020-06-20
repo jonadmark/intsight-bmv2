@@ -27,9 +27,13 @@ def Ygreen(x):
     return 15
 
 def Yorange(x):
-    if x < 30 or x > 30.1:
-        return 15*random.gauss(1, 0.1)
-    return 106.632
+    if x >= 20 and x <= 20.1:
+        return 106.632*random.gauss(1, 0.1)
+    if x >= 30 and x <= 30.1:
+        return 106.632
+    if x >= 40 and x <= 40.1:
+        return 106.632*random.gauss(1, 0.1)
+    return 15*random.gauss(1, 0.1)
 
 
 def gen_pkts(src_addr, dst_addr, src_port, dst_port, yfunc, lorem, seconds, msglen, hdslen, add_noise=True):
