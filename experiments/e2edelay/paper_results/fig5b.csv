@@ -1,0 +1,10 @@
+Traffic,Epoch,EgressEpoch,CPs,SPs,HighDelays
+Green,463,465,c-,--,0
+Green,464,466,c-,--,0
+Teal,463,465,-c-,---,0
+Teal,464,466,-c-,---,0
+Orange,462,464,---,sss,0
+Orange,463,465,c--,sss,0
+Orange,464,466,c--,---,0
+Red,464,465,--c--,-----,39
+Red,465,466,--c--,-----,19
