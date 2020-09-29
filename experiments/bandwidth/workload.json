@@ -4,51 +4,51 @@
             "start_delay": 0,
             "duration": 60,
             "sender": "h1",
-            "sender_opt": "--preload-pcap --stats=1 --limit=160680 --loop=6 --pps=2678 ../resources/workloads/bandwidth/red.pcp",
-            "sender_log": "red-s-h1-h10.txt",
-            "receiver": "h10",
-            "receiver_opt": "10.0.5.10 1234",
-            "receiver_log": "red-r-h1-h10.txt"
+            "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bandwidth/red.pcp",
+            "sender_log": "red-s-h1-h14.txt",
+            "receiver": "h14",
+            "receiver_opt": "10.0.7.14 1234",
+            "receiver_log": "red-r-h1-h14.txt"
         },
         {
-            "start_delay": 5,
-            "duration": 50,
+            "start_delay": 0,
+            "duration": 60,
+            "sender": "h7",
+            "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bandwidth/blue.pcp",
+            "sender_log": "blue-s-h7-h11.txt",
+            "receiver": "h11",
+            "receiver_opt": "10.0.6.11 1234",
+            "receiver_log": "blue-r-h7-h11.txt"
+        },
+        {
+            "start_delay": 0,
+            "duration": 60,
             "sender": "h2",
-            "sender_opt": "--preload-pcap --stats=1 --limit=133900 --loop=6 --pps=2678 ../resources/workloads/bandwidth/blue.pcp",
-            "sender_log": "blue-s-h2-h8.txt",
-            "receiver": "h8",
-            "receiver_opt": "10.0.4.8 1234",
-            "receiver_log": "blue-r-h2-h8.txt"
-        },
-        {
-            "start_delay": 10,
-            "duration": 40,
-            "sender": "h3",
-            "sender_opt": "--preload-pcap --stats=1 --limit=107120 --loop=6 --pps=2678 ../resources/workloads/bandwidth/teal.pcp",
-            "sender_log": "teal-s-h3-h7.txt",
-            "receiver": "h7",
-            "receiver_opt": "10.0.4.7 1234",
-            "receiver_log": "teal-r-h3-h7.txt"
-        },
-        {
-            "start_delay": 15,
-            "duration": 30,
-            "sender": "h4",
-            "sender_opt": "--preload-pcap --stats=1 --limit=80340 --loop=6 --pps=2678 ../resources/workloads/bandwidth/green.pcp",
-            "sender_log": "green-s-h4-h7.txt",
-            "receiver": "h7",
-            "receiver_opt": "10.0.4.7 1235",
-            "receiver_log": "green-r-h4-h7.txt"
-        },
-        {
-            "start_delay": 20,
-            "duration": 20,
-            "sender": "h4",
-            "sender_opt": "--preload-pcap --stats=1 --limit=53560 --loop=6 --pps=2678 ../resources/workloads/bandwidth/orange.pcp",
-            "sender_log": "orange-s-h4-h9.txt",
+            "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bandwidth/teal.pcp",
+            "sender_log": "teal-s-h2-h9.txt",
             "receiver": "h9",
             "receiver_opt": "10.0.5.9 1234",
-            "receiver_log": "orange-r-h4-h9.txt"
+            "receiver_log": "teal-r-h2-h9.txt"
+        },
+        {
+            "start_delay": 0,
+            "duration": 60,
+            "sender": "h5",
+            "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bandwidth/green.pcp",
+            "sender_log": "green-s-h5-h9.txt",
+            "receiver": "h9",
+            "receiver_opt": "10.0.5.9 1235",
+            "receiver_log": "green-r-h5-h9.txt"
+        },
+        {
+            "start_delay": 0,
+            "duration": 60,
+            "sender": "h6",
+            "sender_opt": "--preload-pcap --stats=1 ../resources/workloads/bandwidth/orange.pcp",
+            "sender_log": "orange-s-h6-h13.txt",
+            "receiver": "h13",
+            "receiver_opt": "10.0.7.13 1234",
+            "receiver_log": "orange-r-h6-h13.txt"
         }
     ]
 }
